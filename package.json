@@ -1,0 +1,46 @@
+{
+	"name": "Tasq",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"run:ios": "react-native run-ios",
+		"run:android": "react-native run-android",
+		"lint": "eslint src *.js",
+		"start": "node node_modules/react-native/local-cli/cli.js start",
+		"test": "jest",
+		"test:watch": "jest --watch"
+	},
+	"dependencies": {
+		"normalizr": "^3.2.3",
+		"prop-types": "^15.5.10",
+		"react": "16.0.0-alpha.12",
+		"react-native": "^0.45.0",
+		"react-native-code-push": "^2.1.0-beta",
+		"react-native-code-push-saga": "^1.0.1",
+		"react-native-linear-gradient": "^2.0.0",
+		"react-native-navigation": "^1.1.100",
+		"react-native-vector-icons": "^4.2.0",
+		"react-redux": "^5.0.5",
+		"redux": "^3.6.0",
+		"redux-saga": "^0.15.3",
+		"reselect": "^3.0.1"
+	},
+	"devDependencies": {
+		"babel-eslint": "^7.2.3",
+		"babel-jest": "20.0.3",
+		"babel-preset-react-native": "1.9.2",
+		"eslint": "^3.19.0",
+		"eslint-config-airbnb": "^15.0.1",
+		"eslint-plugin-import": "^2.3.0",
+		"eslint-plugin-jsx-a11y": "^5.0.3",
+		"eslint-plugin-react": "^7.0.1",
+		"eslint-plugin-react-native": "^2.3.2",
+		"jest": "20.0.4",
+		"react-test-renderer": "16.0.0-alpha.12",
+		"redux-saga-testing": "^1.0.4",
+		"remote-redux-devtools": "^0.5.11"
+	},
+	"jest": {
+		"preset": "react-native"
+	}
+}
