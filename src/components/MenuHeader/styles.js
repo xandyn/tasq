@@ -23,12 +23,14 @@ export default StyleSheet.create({
   },
   name: {
     ...BaseStyles.text,
+    flexShrink: 1,
     color: Colors.menu.text,
     fontSize: 20,
     fontFamily: 'Avenir',
   },
   email: {
     ...BaseStyles.text,
+    flexShrink: 1,
     color: Colors.menu.text,
     fontSize: 14,
     opacity: 0.6,

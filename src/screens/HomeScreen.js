@@ -21,12 +21,9 @@ HomeScreen.navigatorButtons = {
 };
 
 HomeScreen.navigatorStyle = {
+  orientation: 'portrait',
   rootBackgroundImageName: 'Background',
   screenBackgroundColor: 'transparent',
-  drawUnderNavBar: true,
-  navBarNoBorder: true,
-  topBarElevationShadowEnabled: false,
-  statusBarColor: '#262430',
   navBarTransparent: true,
   navBarTranslucent: true,
   navBarTextColor: 'white',

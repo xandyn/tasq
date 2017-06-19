@@ -4,7 +4,7 @@ const window = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: 'black',
+    backgroundColor: 'transparent',
     height: '100%',
   },
   image: {
@@ -12,5 +12,6 @@ export default StyleSheet.create({
     alignSelf: 'stretch',
     width: window.width,
     height: window.height,
+    paddingTop: 56,
   },
 });

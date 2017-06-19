@@ -13,17 +13,11 @@ registerScreens(store, Provider);
 const startApp = () => {
   Navigation.startSingleScreenApp({
     screen: {
-      screen: 'tasq.LoginScreen',
-      title: 'Welcome',
+      screen: 'tasq.HomeScreen',
       navigatorButtons: {
         leftButtons: [{
           id: 'sideMenu',
           icon: IconsMap.menu
-        }],
-        rightButtons: [{
-          id: 'search',
-          title: 'Search',
-          icon: IconsMap.search
         }],
       }
     },
@@ -33,6 +27,15 @@ const startApp = () => {
       },
     },
     animationType: 'fade',
+    appStyle: {
+      orientation: 'portrait',
+      statusBarColor: '#262430',
+      statusBarTextColorScheme: 'light',
+      navBarTextColor: 'white',
+      navBarTextFontFamily: 'Avenir-Book',
+      navBarButtonColor: 'white',
+      navBarTitleTextCentered: true,
+    }
   });
 };
 

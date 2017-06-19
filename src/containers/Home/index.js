@@ -1,7 +1,9 @@
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
 
-import Button from '../../components/Button';
+import TodayInfo from '../../components/TodayInfo';
+import Tasks from '../../components/Tasks';
+
 import styles from './styles';
 
 
@@ -10,13 +12,41 @@ export default class Home extends React.Component {
   onPress = () => {};
 
   render() {
+    const tasks = [{
+      id: 1,
+      date: '2017-06-26T12:38:37',
+      text: 'Brian\'s birthday',
+      status: 'completed',
+    }, {
+      id: 2,
+      date: '2017-06-26T12:38:37',
+      text: 'Brian\'s birthday',
+      status: 'completed',
+    }, {
+      id: 3,
+      date: '2017-06-26T12:38:37',
+      text: 'Brian\'s birthday',
+      status: 'snoozed',
+    }, {
+      id: 4,
+      date: '2017-06-26T12:38:37',
+      text: 'Brian\'s birthday',
+      status: 'overdue',
+    }];
     return (
-      <View style={styles.container}>
-        <Button
-          title="Press me"
-          onPress={this.onPress}
+      <ScrollView
+        style={styles.container}
+        bounces={false}
+        showsVerticalScrollIndicator={false}
+      >
+        <TodayInfo
+          dayOfWeek="Wednesday"
+          date="March 18, 2015"
+          tasksTodo={6}
+          tasksTotal={10}
         />
-      </View>
+        <Tasks tasks={tasks} />
+      </ScrollView>
     );
   }
 }

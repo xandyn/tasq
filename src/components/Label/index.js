@@ -7,8 +7,8 @@ import { letterSpacing } from '../../utils';
 import styles from './styles';
 
 
-const Label = ({ upperCase, text, ...props }) => (
-  <Text style={styles.label}>
+const Label = ({ upperCase, text, style, ...props }) => (
+  <Text style={[styles.label, style]}>
     {letterSpacing(upperCase ? text.toUpperCase() : text)}
   </Text>
 );
@@ -16,10 +16,12 @@ const Label = ({ upperCase, text, ...props }) => (
 
 Label.defaultProps = {
   upperCase: false,
+  style: undefined,
 };
 
 Label.propTypes = {
   upperCase: PropTypes.bool,
+  style: PropTypes.number,
   text: PropTypes.string.isRequired,
 };
 

@@ -7,6 +7,7 @@ import MenuItem from '../../components/MenuItem';
 
 import styles, { colors } from './styles';
 
+
 export default class Menu extends React.Component {
 
   render() {

@@ -11,6 +11,7 @@
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
+		"moment": "^2.18.1",
 		"normalizr": "^3.2.3",
 		"prop-types": "^15.5.10",
 		"react": "16.0.0-alpha.12",
