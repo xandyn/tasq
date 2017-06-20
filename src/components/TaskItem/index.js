@@ -7,7 +7,7 @@ import Divider from '../Divider';
 import styles, { colors } from './styles';
 
 
-const TaskItem = ({ item: { date, text, status } }) => (
+const TaskItem = ({ item: { date, text, status }, showDivider }) => (
   <View style={styles.container}>
     <View style={styles.item}>
       <Text style={styles.due}>
@@ -18,13 +18,14 @@ const TaskItem = ({ item: { date, text, status } }) => (
       </Text>
       <View style={[styles.color, { backgroundColor: colors.taskStatus[status] }]} />
     </View>
-    <Divider />
+    {showDivider && <Divider />}
   </View>
 );
 
 
 TaskItem.propTypes = {
   item: PropTypes.object.isRequired,
+  showDivider: PropTypes.bool.isRequired,
 };
 
 

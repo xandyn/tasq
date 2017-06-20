@@ -3,11 +3,6 @@ import BaseStyles from '../../styles/Base';
 
 
 export default StyleSheet.create({
-  line: {
-    width: '100%',
-    height: 1,
-    opacity: 0.1,
-  },
   btn: {
     ...BaseStyles.btn,
     alignItems: 'center',

@@ -9,7 +9,13 @@ import styles from './styles';
 
 const Tasks = ({ tasks }) => (
   <View style={styles.container}>
-    {tasks.map(item => <TaskItem key={item.id} item={item} />)}
+    {tasks.map((item, index) => (
+      <TaskItem
+        key={item.id}
+        item={item}
+        showDivider={tasks.length !== index + 1}
+      />
+    ))}
   </View>
 );
 
