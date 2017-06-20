@@ -13,7 +13,7 @@ registerScreens(store, Provider);
 const startApp = () => {
   Navigation.startSingleScreenApp({
     screen: {
-      screen: 'tasq.HomeScreen',
+      screen: 'tasq.CalendarScreen',
       navigatorButtons: {
         leftButtons: [{
           id: 'sideMenu',
