@@ -1,9 +1,8 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
+import { Calendar as CalendarView } from 'react-native-calendars';
 import moment from 'moment';
 
-import Button from '../../components/Button';
-import CalendarView from '../../components/Calendar';
 
 import styles from './styles';
 
@@ -11,16 +10,12 @@ import styles from './styles';
 export default class Calendar extends React.Component {
 
   state = {
-    current: moment().format('YYYY-MM-DD'),
-    selected: moment().format('YYYY-MM-DD')
+    current: moment().format('YYYY-MM'),
+    selected: moment().format('YYYY-MM-DD'),
   };
 
-  onPress = () => {
-    this.setState({ current: '2017-07-01' });
-  };
-
-  onDayPress = (day) => {
-    this.setState({ selected: day });
+  onDayPress = ({ dateString }) => {
+    this.setState({ selected: dateString });
   };
 
   render() {
@@ -49,6 +44,7 @@ export default class Calendar extends React.Component {
       dayTextStyle: { fontFamily: 'Avenir-Book' },
       weekDaysStyle: { fontFamily: 'Avenir-Book' },
     };
+    const { current, selected } = this.state;
     return (
       <ScrollView
         style={styles.container}
@@ -56,8 +52,9 @@ export default class Calendar extends React.Component {
         showsVerticalScrollIndicator={false}
       >
         <CalendarView
-          current={this.state.current}
-          selected={this.state.selected}
+          hideHeader
+          currentMonth={current}
+          selected={[selected]}
           markedDates={{
             '2017-06-16': { marked: true },
             '2017-06-17': { marked: true },
@@ -66,7 +63,6 @@ export default class Calendar extends React.Component {
           onDayPress={this.onDayPress}
           theme={calendarTheme}
         />
-        <Button title="To July" onPress={this.onPress} />
       </ScrollView>
     );
   }
