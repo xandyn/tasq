@@ -10,6 +10,7 @@ export function* screenSet({ payload }) {
     animationType: 'fade'
   });
   yield call(NavigationActions.toggleDrawer, {
+    side: 'left',
     to: 'closed'
   });
 }
