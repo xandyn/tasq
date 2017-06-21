@@ -1,16 +1,40 @@
 import React from 'react';
 import { View } from 'react-native';
+import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { onlyUpdateForKeys } from 'recompose';
 
 import Divider from '../../components/Divider';
 import MenuHeader from '../../components/MenuHeader';
 import MenuItem from '../../components/MenuItem';
 
+import * as uiActions from '../../actions/ui';
+
 import styles, { colors } from './styles';
 
 
+@connect(
+  ({ ui }) => ({
+    screen: ui.data.screen,
+  }),
+  dispatch => bindActionCreators({
+    ...uiActions,
+  }, dispatch)
+)
+@onlyUpdateForKeys(['screen'])
 export default class Menu extends React.Component {
+  static propTypes = {
+    screen: PropTypes.string.isRequired,
+    setScreen: PropTypes.func.isRequired,
+  };
+
+  onPressMenu = screen => (e) => {
+    this.props.setScreen(screen);
+  };
 
   render() {
+    const { screen } = this.props;
     return (
       <View style={styles.container}>
         <MenuHeader
@@ -20,8 +44,18 @@ export default class Menu extends React.Component {
         />
         <Divider color={colors.primary} />
         <View style={styles.list}>
-          <MenuItem active icon="home" title="Home" />
-          <MenuItem icon="calendar" title="Calendar" />
+          <MenuItem
+            active={screen === 'HomeScreen'}
+            icon="home"
+            title="Home"
+            onPress={this.onPressMenu('HomeScreen')}
+          />
+          <MenuItem
+            active={screen === 'CalendarScreen'}
+            icon="calendar"
+            title="Calendar"
+            onPress={this.onPressMenu('CalendarScreen')}
+          />
           <MenuItem icon="stats" title="Overview" />
           <MenuItem icon="time" title="Timeline" />
           <MenuItem icon="contact" title="Profile" />

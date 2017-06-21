@@ -18,6 +18,13 @@ CalendarScreen.navigatorButtons = {
     id: 'menu',
     icon: IconsMap.menu,
   }],
+  rightButtons: [{
+    id: 'nextMonth',
+    icon: IconsMap.forward
+  }, {
+    id: 'prevMonth',
+    icon: IconsMap.back
+  }]
 };
 
 CalendarScreen.navigatorStyle = {

@@ -5,6 +5,7 @@ const icons = {
   search: [Ionicons, 'ios-search-outline', 30, '#FFFFFF'],
   email: [Ionicons, 'ios-mail-outline', 30, '#FFFFFF'],
   back: [Ionicons, 'ios-arrow-back', 30, '#FFFFFF'],
+  forward: [Ionicons, 'ios-arrow-forward', 30, '#FFFFFF'],
 };
 
 export const IconsMap = {};

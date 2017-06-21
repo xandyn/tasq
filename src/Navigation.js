@@ -14,6 +14,7 @@ class NavigationActions {
   pop = params => this.navigator.pop(params);
   popToRoot = params => this.navigator.popToRoot(params);
   resetTo = params => this.navigator.resetTo(params);
+  toggleDrawer = params => this.navigator.toggleDrawer(params);
   showModal = params => this.navigator.showModal(params);
   dismissModal = params => this.navigator.dismissModal(params);
   dismissAllModals = params => this.navigator.dismissAllModals(params);

@@ -1,21 +1,76 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
+import PropTypes from 'prop-types';
 import { Calendar as CalendarView } from 'react-native-calendars';
 import moment from 'moment';
 
+import NavigationActions from '../../Navigation';
 
 import styles from './styles';
 
 
 export default class Calendar extends React.Component {
+  static propTypes = {
+    navigator: PropTypes.object.isRequired,
+  };
 
-  state = {
-    current: moment().format('YYYY-MM'),
-    selected: moment().format('YYYY-MM-DD'),
+  constructor(props) {
+    super(props);
+
+    const current = moment();
+    const selected = moment();
+    this.state = {
+      current: current.format('YYYY-MM-DD'),
+      selected: selected.format('YYYY-MM-DD'),
+    };
+
+    props.navigator.setTitle({ title: current.format('MMMM YYYY') });
+
+    NavigationActions.setNavigator(props.navigator);
+    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+  }
+
+  onNavigatorEvent = (event) => {
+    switch (event.id) {
+      case 'menu':
+        this.props.navigator.toggleDrawer({ side: 'left' });
+        break;
+      case 'prevMonth': {
+        const current = moment(this.state.current)
+          .subtract(1, 'month')
+          .startOf('month')
+          .format('YYYY-MM-DD');
+        this.changeMonth(current);
+        break;
+      }
+      case 'nextMonth': {
+        const current = moment(this.state.current)
+          .add(1, 'month')
+          .startOf('month')
+          .format('YYYY-MM-DD');
+        this.changeMonth(current);
+        break;
+      }
+      default:
+        break;
+    }
   };
 
   onDayPress = ({ dateString }) => {
     this.setState({ selected: dateString });
+    this.props.navigator.setTitle({
+      title: moment(dateString).format('MMMM YYYY')
+    });
+  };
+
+  changeMonth = (date) => {
+    this.setState({
+      current: date,
+      selected: date
+    });
+    this.props.navigator.setTitle({
+      title: moment(date).format('MMMM YYYY')
+    });
   };
 
   render() {
@@ -53,7 +108,7 @@ export default class Calendar extends React.Component {
       >
         <CalendarView
           hideHeader
-          currentMonth={current}
+          current={current}
           selected={[selected]}
           markedDates={{
             '2017-06-16': { marked: true },
