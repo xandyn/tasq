@@ -5,6 +5,7 @@ import SideMenu from './SideMenu';
 import HomeScreen from './HomeScreen';
 import CalendarScreen from './CalendarScreen';
 import TimelineScreen from './TimelineScreen';
+import OverviewScreen from './OverviewScreen';
 
 
 export default function registerScreens(store, Provider) {
@@ -13,4 +14,5 @@ export default function registerScreens(store, Provider) {
   Navigation.registerComponent('tasq.HomeScreen', () => HomeScreen, store, Provider);
   Navigation.registerComponent('tasq.CalendarScreen', () => CalendarScreen, store, Provider);
   Navigation.registerComponent('tasq.TimelineScreen', () => TimelineScreen, store, Provider);
+  Navigation.registerComponent('tasq.OverviewScreen', () => OverviewScreen, store, Provider);
 }
