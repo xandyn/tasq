@@ -1,10 +1,11 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Calendar as CalendarView } from 'react-native-calendars';
 import moment from 'moment';
 
 import Tasks from '../../components/Tasks';
+import CreateButton from '../../components/CreateButton';
 
 import NavigationActions from '../../Navigation';
 
@@ -102,21 +103,24 @@ export default class Calendar extends React.Component {
     };
     const { current, selected } = this.state;
     return (
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-        <CalendarView
-          hideHeader
-          current={current}
-          selected={[selected]}
-          markedDates={{
-            '2017-06-16': { marked: true },
-            '2017-06-17': { marked: true },
-            '2017-06-18': { disabled: true }
-          }}
-          onDayPress={this.onDayPress}
-          theme={calendarTheme}
-        />
-        <Tasks showEdgeDividers tasks={tasks} />
-      </ScrollView>
+      <View style={styles.container}>
+        <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+          <CalendarView
+            hideHeader
+            current={current}
+            selected={[selected]}
+            markedDates={{
+              '2017-06-16': { marked: true },
+              '2017-06-17': { marked: true },
+              '2017-06-18': { disabled: true }
+            }}
+            onDayPress={this.onDayPress}
+            theme={calendarTheme}
+          />
+          <Tasks showEdgeDividers tasks={tasks} />
+        </ScrollView>
+        <CreateButton />
+      </View>
     );
   }
 }
