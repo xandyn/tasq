@@ -2,29 +2,21 @@ import { Navigation } from 'react-native-navigation';
 import { Provider } from 'react-redux';
 import registerScreens from './screens';
 import configureStore from './store/configureStore';
-import { IconsMap } from './assets/icons';
 
 
 const store = configureStore();
 
 registerScreens(store, Provider);
 
+const screen = store.getState().ui.data.screen;
 
 const startApp = () => {
   Navigation.startSingleScreenApp({
     screen: {
-      screen: 'tasq.HomeScreen',
-      navigatorButtons: {
-        leftButtons: [{
-          id: 'menu',
-          icon: IconsMap.menu
-        }],
-      }
+      screen: `tasq.${screen}`
     },
     drawer: {
-      left: {
-        screen: 'tasq.SideMenu',
-      },
+      left: { screen: 'tasq.SideMenu' }
     },
     animationType: 'fade',
     appStyle: {

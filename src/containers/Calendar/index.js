@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { Calendar as CalendarView } from 'react-native-calendars';
 import moment from 'moment';
 
+import Tasks from '../../components/Tasks';
+
 import NavigationActions from '../../Navigation';
 
 import styles from './styles';
@@ -25,6 +27,10 @@ export default class Calendar extends React.Component {
     };
 
     props.navigator.setTitle({ title: current.format('MMMM YYYY') });
+    props.navigator.setStyle({
+      navBarTextFontFamily: 'Avenir-Book',
+      navBarTitleTextCentered: true,
+    });
 
     NavigationActions.setNavigator(props.navigator);
     props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
@@ -36,18 +42,12 @@ export default class Calendar extends React.Component {
         this.props.navigator.toggleDrawer({ side: 'left' });
         break;
       case 'prevMonth': {
-        const current = moment(this.state.current)
-          .subtract(1, 'month')
-          .startOf('month')
-          .format('YYYY-MM-DD');
+        const current = moment(this.state.current).subtract(1, 'month').startOf('month');
         this.changeMonth(current);
         break;
       }
       case 'nextMonth': {
-        const current = moment(this.state.current)
-          .add(1, 'month')
-          .startOf('month')
-          .format('YYYY-MM-DD');
+        const current = moment(this.state.current).add(1, 'month').startOf('month');
         this.changeMonth(current);
         break;
       }
@@ -65,11 +65,11 @@ export default class Calendar extends React.Component {
 
   changeMonth = (date) => {
     this.setState({
-      current: date,
-      selected: date
+      current: date.format('YYYY-MM-DD'),
+      selected: date.format('YYYY-MM-DD')
     });
     this.props.navigator.setTitle({
-      title: moment(date).format('MMMM YYYY')
+      title: date.format('MMMM YYYY')
     });
   };
 
@@ -96,16 +96,13 @@ export default class Calendar extends React.Component {
       status: 'overdue',
     }];
     const calendarTheme = {
+      calendarContainerStyle: { marginVertical: 5 },
       dayTextStyle: { fontFamily: 'Avenir-Book' },
       weekDaysStyle: { fontFamily: 'Avenir-Book' },
     };
     const { current, selected } = this.state;
     return (
-      <ScrollView
-        style={styles.container}
-        bounces={false}
-        showsVerticalScrollIndicator={false}
-      >
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <CalendarView
           hideHeader
           current={current}
@@ -118,6 +115,7 @@ export default class Calendar extends React.Component {
           onDayPress={this.onDayPress}
           theme={calendarTheme}
         />
+        <Tasks showEdgeDividers tasks={tasks} />
       </ScrollView>
     );
   }
