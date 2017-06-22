@@ -56,8 +56,13 @@ export default class Menu extends React.Component {
             title="Calendar"
             onPress={this.onPressMenu('CalendarScreen')}
           />
+          <MenuItem
+            active={screen === 'TimelineScreen'}
+            icon="time"
+            title="Timeline"
+            onPress={this.onPressMenu('TimelineScreen')}
+          />
           <MenuItem icon="stats" title="Overview" />
-          <MenuItem icon="time" title="Timeline" />
           <MenuItem icon="contact" title="Profile" />
         </View>
         <Divider color={colors.primary} />
