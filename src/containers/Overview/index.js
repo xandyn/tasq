@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 import MonthNavigator from '../../components/MonthNavigator';
 import TotalTasksInfo from '../../components/TotalTasksInfo';
@@ -18,7 +19,9 @@ export default class Overview extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      current: moment()
+    };
 
     props.navigator.setTitle({ title: 'Overview' });
     props.navigator.setStyle({
@@ -40,6 +43,14 @@ export default class Overview extends React.Component {
       default:
         break;
     }
+  };
+
+  onMonthChange = direction => (e) => {
+    this.setState(prevState => ({
+      current: direction === 'prev'
+        ? moment(prevState.current).subtract(1, 'month')
+        : moment(prevState.current).add(1, 'month')
+    }));
   };
 
   render() {
@@ -69,13 +80,14 @@ export default class Overview extends React.Component {
       text: 'Brian\'s birthday',
       status: 'overdue',
     }];
+    const { current } = this.state;
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
           <MonthNavigator
-            onMonthChange={() => {}}
-            month="January"
-            year="2015"
+            onMonthChange={this.onMonthChange}
+            month={current.format('MMMM')}
+            year={current.format('YYYY')}
           />
           <TotalTasksInfo
             completed={34}

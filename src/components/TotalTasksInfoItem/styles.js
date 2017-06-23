@@ -17,10 +17,15 @@ export default StyleSheet.create({
     justifyContent: 'center',
     width: '33%'
   },
-  graph: {
-    width: 30,
-    height: 30,
-    borderRadius: 30,
+  outerCircle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  innerCircle: {
+    position: 'absolute',
+    width: 7,
+    height: 7,
+    borderRadius: 7,
   },
   textContainer: {
     alignItems: 'center',

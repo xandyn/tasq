@@ -37,6 +37,7 @@
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		7223DC671EEFBF160007EDE2 /* Avenir.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7223DC661EEFBF160007EDE2 /* Avenir.ttf */; };
 		7223DCBF1EEFF3EC0007EDE2 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7223DCA01EEFF3D90007EDE2 /* libBVLinearGradient.a */; };
+		729F76B51EFD1303002F0958 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 729F76B21EFD12F0002F0958 /* libART.a */; };
 		72BB3EC11EEFAAEA00CAE135 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72BB3EB71EEFAAEA00CAE135 /* Entypo.ttf */; };
 		72BB3EC21EEFAAEA00CAE135 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72BB3EB81EEFAAEA00CAE135 /* EvilIcons.ttf */; };
 		72BB3EC31EEFAAEA00CAE135 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72BB3EB91EEFAAEA00CAE135 /* FontAwesome.ttf */; };
@@ -239,6 +240,20 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = BVLinearGradient;
 		};
+		729F76B11EFD12F0002F0958 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 729F76AC1EFD12F0002F0958 /* ART.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
+			remoteInfo = ART;
+		};
+		729F76B31EFD12F0002F0958 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 729F76AC1EFD12F0002F0958 /* ART.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 323A12871E5F266B004975B8;
+			remoteInfo = "ART-tvOS";
+		};
 		72BB3EE71EEFAAEA00CAE135 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
@@ -315,6 +330,7 @@
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		7223DC661EEFBF160007EDE2 /* Avenir.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Avenir.ttf; sourceTree = "<group>"; };
 		7223DC9B1EEFF3D90007EDE2 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
+		729F76AC1EFD12F0002F0958 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		72BB3EB71EEFAAEA00CAE135 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
 		72BB3EB81EEFAAEA00CAE135 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
 		72BB3EB91EEFAAEA00CAE135 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
@@ -347,6 +363,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				729F76B51EFD1303002F0958 /* libART.a in Frameworks */,
 				7223DCBF1EEFF3EC0007EDE2 /* libBVLinearGradient.a in Frameworks */,
 				72BB3EF21EEFAC0500CAE135 /* libRNVectorIcons.a in Frameworks */,
 				72CF56BD1EE835FC00CDC834 /* libz.tbd in Frameworks */,
@@ -517,6 +534,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		729F76AD1EFD12F0002F0958 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				729F76B21EFD12F0002F0958 /* libART.a */,
+				729F76B41EFD12F0002F0958 /* libART-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		72BB3EB61EEFAAEA00CAE135 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,6 +606,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				729F76AC1EFD12F0002F0958 /* ART.xcodeproj */,
 				7223DC9B1EEFF3D90007EDE2 /* BVLinearGradient.xcodeproj */,
 				72BB3EEC1EEFABF600CAE135 /* RNVectorIcons.xcodeproj */,
 				72CF56B31EE835C700CDC834 /* CodePush.xcodeproj */,
@@ -747,6 +774,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 729F76AD1EFD12F0002F0958 /* Products */;
+					ProjectRef = 729F76AC1EFD12F0002F0958 /* ART.xcodeproj */;
+				},
 				{
 					ProductGroup = 7223DC9C1EEFF3D90007EDE2 /* Products */;
 					ProjectRef = 7223DC9B1EEFF3D90007EDE2 /* BVLinearGradient.xcodeproj */;
@@ -985,6 +1016,20 @@
 			fileType = archive.ar;
 			path = libBVLinearGradient.a;
 			remoteRef = 7223DC9F1EEFF3D90007EDE2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		729F76B21EFD12F0002F0958 /* libART.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libART.a;
+			remoteRef = 729F76B11EFD12F0002F0958 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		729F76B41EFD12F0002F0958 /* libART-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libART-tvOS.a";
+			remoteRef = 729F76B31EFD12F0002F0958 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		72BB3EE81EEFAAEA00CAE135 /* libthird-party.a */ = {
@@ -1232,7 +1277,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 8RAETFZVRN;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-navigation/ios/**";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
+					"$(SRCROOT)/../node_modules/react-native/LIbraries/ART",
+				);
 				INFOPLIST_FILE = Tasq/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1252,7 +1300,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8RAETFZVRN;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-navigation/ios/**";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
+					"$(SRCROOT)/../node_modules/react-native/LIbraries/ART",
+				);
 				INFOPLIST_FILE = Tasq/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (

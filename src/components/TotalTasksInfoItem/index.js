@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Circle from 'react-native-progress/Circle';
 
 import Label from '../Label';
 
@@ -11,7 +12,17 @@ import styles, { colors } from './styles';
 const TotalTasksInfoItem = ({ type, count, percents }) => (
   <View style={styles.item}>
     <View style={styles.itemContainer}>
-      <View style={[styles.graph, { backgroundColor: colors.taskStatus[type] }]} />
+      <Circle
+        size={30}
+        progress={0.5}
+        unfilledColor="rgba(255,255,255,0.1)"
+        borderWidth={0}
+        thickness={2}
+        color={colors.taskStatus[type]}
+        style={styles.outerCircle}
+      >
+        <View style={[styles.innerCircle, { backgroundColor: colors.taskStatus[type] }]} />
+      </Circle>
     </View>
     <View style={styles.itemContainer}>
       <Label style={styles.label} upperCase text={type} />

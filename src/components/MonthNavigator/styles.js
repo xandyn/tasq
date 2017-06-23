@@ -10,6 +10,7 @@ export default StyleSheet.create({
     ...BaseStyles.flexRow,
     alignItems: 'center',
     justifyContent: 'space-between',
+    alignContent: 'stretch',
   },
   arrow: {
     opacity: 0.5,
@@ -20,13 +21,15 @@ export default StyleSheet.create({
   textContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+    height: 125,
   },
   month: {
     ...BaseStyles.text,
     fontSize: 32,
     fontWeight: '300',
     letterSpacing: 0.5,
-    fontFamily: 'Avenir'
+    fontFamily: 'Avenir',
+    marginBottom: 5,
   },
   year: {
     ...BaseStyles.text,
