@@ -64,6 +64,13 @@ export default class Calendar extends React.Component {
     });
   };
 
+  onCreateTask = () => {
+    this.props.navigator.push({
+      screen: 'tasq.NewTaskScreen',
+      animationType: 'fade'
+    });
+  };
+
   changeMonth = (date) => {
     this.setState({
       current: date.format('YYYY-MM-DD'),
@@ -119,7 +126,7 @@ export default class Calendar extends React.Component {
           />
           <Tasks showEdgeDividers tasks={tasks} />
         </ScrollView>
-        <CreateButton />
+        <CreateButton onPress={this.onCreateTask} />
       </View>
     );
   }
