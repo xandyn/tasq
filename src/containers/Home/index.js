@@ -33,7 +33,12 @@ export default class Home extends React.Component {
     }
   };
 
-  onPress = () => {};
+  onCreateTask = () => {
+    this.props.navigator.push({
+      screen: 'tasq.NewTaskScreen',
+      animationType: 'fade'
+    });
+  };
 
   render() {
     const tasks = [{
@@ -68,7 +73,7 @@ export default class Home extends React.Component {
           />
           <Tasks tasks={tasks} />
         </ScrollView>
-        <CreateButton />
+        <CreateButton onPress={this.onCreateTask} />
       </View>
     );
   }

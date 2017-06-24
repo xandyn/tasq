@@ -6,6 +6,8 @@ const icons = {
   email: [Ionicons, 'ios-mail-outline', 30, '#FFFFFF'],
   back: [Ionicons, 'ios-arrow-back', 30, '#FFFFFF'],
   forward: [Ionicons, 'ios-arrow-forward', 30, '#FFFFFF'],
+  checkmark: [Ionicons, 'ios-checkmark-outline', 50, '#FFFFFF'],
+  close: [Ionicons, 'ios-close-outline', 40, '#FFFFFF'],
 };
 
 export const IconsMap = {};
