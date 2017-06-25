@@ -8,12 +8,14 @@ const store = configureStore();
 
 registerScreens(store, Provider);
 
-const screen = store.getState().ui.data.screen;
+
+const { screen } = store.getState().ui.data;
+const { isAuthSkipped } = store.getState().auth.data;
 
 const startApp = () => {
   Navigation.startSingleScreenApp({
     screen: {
-      screen: `tasq.${screen}`
+      screen: `tasq.${isAuthSkipped ? screen : 'LoginScreen'}`
     },
     drawer: {
       left: { screen: 'tasq.SideMenu' }

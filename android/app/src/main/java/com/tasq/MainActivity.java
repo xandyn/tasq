@@ -1,8 +1,14 @@
 package com.tasq;
 
+import android.content.Intent;
 import com.reactnativenavigation.controllers.SplashActivity;
 
 public class MainActivity extends SplashActivity {
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        MainApplication.getCallbackManager().onActivityResult(requestCode, resultCode, data);
+    }
 
     /**
      * Returns the name of the main component registered from JavaScript.
