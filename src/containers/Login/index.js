@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Image, TextInput } from 'react-native';
+import { View, Image, TextInput, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
 
@@ -54,6 +54,10 @@ export default class Login extends React.Component {
       }
     );
   };
+
+  onGoogleLogin = () => {};
+
+  onSkipLogin = () => {};
 
   render() {
     const { email, password } = this.state;
@@ -120,8 +124,24 @@ export default class Login extends React.Component {
           source={require('../../assets/img/logo.png')}
         />
         <View style={styles.credentials}>
-          <Button title="Facebook login" onPress={this.onFacebookLogin} />
-          <Button title="Sign In" onPress={this.onPressLogin} />
+          <Button
+            style={styles.button}
+            title="Login with Facebook"
+            icon="logo-facebook"
+            onPress={this.onFacebookLogin}
+          />
+          <Button
+            style={styles.button}
+            title="Login with Google"
+            icon="logo-google"
+            onPress={this.onGoogleLogin}
+          />
+          <TouchableOpacity onPress={this.onSkipLogin}>
+            <View style={styles.skipLogin}>
+              <Label style={[styles.skipLoginText, { opacity: 0.5 }]} text="DON'T HAVE ACCOUNTS?" />
+              <Label style={styles.skipLoginText} text="GO OFFLINE" />
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     );

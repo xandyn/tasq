@@ -27,6 +27,19 @@ export default StyleSheet.create({
     marginBottom: 30,
     width: '100%',
   },
+  button: {
+    marginBottom: 30,
+  },
+  skipLogin: {
+    ...BaseStyles.flexRow,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  skipLoginText: {
+    ...BaseStyles.label,
+    fontSize: 11,
+    marginRight: 5,
+  },
   icon: {
     opacity: 0.5,
     marginRight: 25,

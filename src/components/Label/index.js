@@ -21,7 +21,7 @@ Label.defaultProps = {
 
 Label.propTypes = {
   upperCase: PropTypes.bool,
-  style: PropTypes.number,
+  style: PropTypes.any,
   text: PropTypes.string.isRequired,
 };
 
