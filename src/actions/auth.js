@@ -17,5 +17,26 @@ export function isAuthSkipped(payload) {
   };
 }
 
+types.AUTH_WITH_FACEBOOK = 'auth/AUTH_WITH_FACEBOOK';
+export function authWithFacebook() {
+  return {
+    type: types.AUTH_WITH_FACEBOOK
+  };
+}
+
+types.AUTH_WITH_GOOGLE = 'auth/AUTH_WITH_GOOGLE';
+export function authWithGoogle() {
+  return {
+    type: types.AUTH_WITH_GOOGLE
+  };
+}
+
+types.AUTH_SKIP = 'auth/AUTH_SKIP';
+export function authSkip() {
+  return {
+    type: types.AUTH_SKIP
+  };
+}
+
 
 export default types;

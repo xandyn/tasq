@@ -1,122 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Image, TextInput, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { LoginManager, AccessToken } from 'react-native-fbsdk';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { View, Image, TouchableOpacity } from 'react-native';
 
-import Divider from '../../components/Divider';
 import Button from '../../components/Button';
 import Label from '../../components/Label';
 
-import firebase from '../../Firebase';
+import * as authActions from '../../actions/auth';
+
+import NavigationActions from '../../Navigation';
 
 import styles from './styles';
 
 
+@connect(
+  null,
+  dispatch => bindActionCreators({
+    ...authActions,
+  }, dispatch)
+)
 export default class Login extends React.Component {
   static propTypes = {
+    authWithFacebook: PropTypes.func.isRequired,
+    authWithGoogle: PropTypes.func.isRequired,
+    authSkip: PropTypes.func.isRequired,
     navigator: PropTypes.object.isRequired
   };
 
-  state = {
-    email: '',
-    password: '',
-  };
+  constructor(props) {
+    super(props);
 
-  onPressLogin = () => {
-    this.props.navigator.resetTo({
-      screen: 'tasq.HomeScreen',
-      animationType: 'fade'
-    });
-  };
+    NavigationActions.setNavigator(props.navigator);
+  }
 
   onFacebookLogin = () => {
-    LoginManager.logInWithReadPermissions(['public_profile', 'email']).then(
-      (result) => {
-        if (result.isCancelled) {
-          console.log('Facebook login cancelled');
-        } else {
-          AccessToken.getCurrentAccessToken().then((data) => {
-            const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
-
-            firebase.auth().signInWithCredential(credential).then((user) => {
-              console.log('user', user);
-            }, (error) => {
-              console.log('firebase auth error', error);
-            });
-          }, (error) => {
-            console.log('AccessToken error', error);
-          });
-        }
-      },
-      (error) => {
-        console.log('Error facebook login', error);
-      }
-    );
+    this.props.authWithFacebook();
   };
 
-  onGoogleLogin = () => {};
+  onGoogleLogin = () => {
+    this.props.authWithGoogle();
+  };
 
-  onSkipLogin = () => {};
+  onSkipLogin = () => {
+    this.props.authSkip();
+  };
 
   render() {
-    const { email, password } = this.state;
-    const emailField = (
-      <View style={styles.formControl}>
-        <View style={styles.formGroup}>
-          <Icon
-            style={styles.icon}
-            name="ios-mail-outline"
-            size={30}
-            color="white"
-          />
-          <View style={styles.inputGroup}>
-            <Label upperCase text="email" />
-            <TextInput
-              style={styles.input}
-              value={email}
-              onChangeText={v => this.setState({ email: v })}
-              placeholder="Enter email"
-              placeholderTextColor="rgba(255,255,255,0.5)"
-              keyboardType="email-address"
-              underlineColorAndroid="transparent"
-              selectionColor="white"
-              autoCorrect={false}
-              autoCapitalize="none"
-            />
-          </View>
-        </View>
-        <Divider />
-      </View>
-    );
-    const passwordField = (
-      <View style={styles.formControl}>
-        <View style={styles.formGroup}>
-          <Icon
-            style={styles.icon}
-            name="ios-lock-outline"
-            size={30}
-            color="white"
-          />
-          <View style={styles.inputGroup}>
-            <Label upperCase text="password" />
-            <TextInput
-              secureTextEntry
-              style={styles.input}
-              value={password}
-              onChangeText={v => this.setState({ password: v })}
-              placeholder="Enter password"
-              placeholderTextColor="rgba(255,255,255,0.5)"
-              underlineColorAndroid="transparent"
-              selectionColor="white"
-              autoCorrect={false}
-              autoCapitalize="none"
-            />
-          </View>
-        </View>
-        <Divider />
-      </View>
-    );
     return (
       <View style={styles.container}>
         <Image
