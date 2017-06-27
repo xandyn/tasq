@@ -2,10 +2,11 @@ const types = {};
 
 
 types.SET_SCREEN = 'ui/SET_SCREEN';
-export function setScreen(payload) {
+export function setScreen(payload, closeDrawer = false) {
   return {
     type: types.SET_SCREEN,
-    payload
+    payload,
+    meta: { closeDrawer }
   };
 }
 

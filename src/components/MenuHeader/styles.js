@@ -16,6 +16,7 @@ export default StyleSheet.create({
   avatar: {
     height: 50,
     width: 50,
+    borderRadius: 25,
     marginRight: 20,
   },
   info: {
@@ -34,5 +35,11 @@ export default StyleSheet.create({
     color: Colors.menu.text,
     fontSize: 14,
     opacity: 0.6,
+  },
+  loginBtn: {
+    ...BaseStyles.text,
+    color: Colors.menu.text,
+    fontSize: 18,
+    fontFamily: 'Avenir',
   },
 });

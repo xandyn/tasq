@@ -1,8 +1,8 @@
-import { call, take, put, takeEvery } from 'redux-saga/effects';
+import { call, take, put, takeLatest } from 'redux-saga/effects';
 
 import types, { syncProfile, isAuth, isAuthSkipped } from '../actions/auth';
+import { setScreen } from '../actions/ui';
 
-import NavigationActions from '../Navigation';
 import Database from '../firebase/database';
 import Auth from '../firebase/auth';
 
@@ -40,6 +40,7 @@ export function* authWithFacebook() {
   if (!user) return;
 
   yield put(isAuth(true));
+  yield put(setScreen('HomeScreen'));
 }
 
 
@@ -51,24 +52,21 @@ export function* authWithGoogle() {
 export function* authSkip() {
   yield put(isAuth(false));
   yield put(isAuthSkipped(true));
-  yield call(NavigationActions.resetTo, {
-    screen: 'tasq.HomeScreen',
-    animationType: 'fade'
-  });
+  yield put(setScreen('HomeScreen'));
 }
 
 
 function* watchAuthWithFacebook() {
-  yield takeEvery(types.AUTH_WITH_FACEBOOK, authWithFacebook);
+  yield takeLatest(types.AUTH_WITH_FACEBOOK, authWithFacebook);
 }
 
 
 function* watchAuthWithGoogle() {
-  yield takeEvery(types.AUTH_WITH_GOOGLE, authWithGoogle);
+  yield takeLatest(types.AUTH_WITH_GOOGLE, authWithGoogle);
 }
 
 function* watchAuthSkip() {
-  yield takeEvery(types.AUTH_SKIP, authSkip);
+  yield takeLatest(types.AUTH_SKIP, authSkip);
 }
 
 

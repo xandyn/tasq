@@ -4,15 +4,17 @@ import types from '../actions/ui';
 import NavigationActions from '../Navigation';
 
 
-export function* screenSet({ payload }) {
+export function* screenSet({ payload, meta: { closeDrawer } }) {
   yield call(NavigationActions.resetTo, {
     screen: `tasq.${payload}`,
     animationType: 'fade'
   });
-  yield call(NavigationActions.toggleDrawer, {
-    side: 'left',
-    to: 'closed'
-  });
+  if (closeDrawer) {
+    yield call(NavigationActions.toggleDrawer, {
+      side: 'left',
+      to: 'closed'
+    });
+  }
 }
 
 

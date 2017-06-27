@@ -15,33 +15,31 @@ import styles, { colors } from './styles';
 
 
 @connect(
-  ({ ui }) => ({
+  ({ auth, ui }) => ({
     screen: ui.data.screen,
+    profile: auth.data,
   }),
   dispatch => bindActionCreators({
     ...uiActions,
   }, dispatch)
 )
-@onlyUpdateForKeys(['screen'])
+@onlyUpdateForKeys(['screen', 'profile'])
 export default class Menu extends React.Component {
   static propTypes = {
     screen: PropTypes.string.isRequired,
+    profile: PropTypes.object.isRequired,
     setScreen: PropTypes.func.isRequired,
   };
 
   onPressMenu = screen => (e) => {
-    this.props.setScreen(screen);
+    this.props.setScreen(screen, true);
   };
 
   render() {
-    const { screen } = this.props;
+    const { screen, profile } = this.props;
     return (
       <View style={styles.container}>
-        <MenuHeader
-          avatar={require('../../assets/img/avatar.png')}
-          name="Janet Valdez"
-          email="janet@invisionapp.com"
-        />
+        <MenuHeader profile={profile} />
         <Divider color={colors.primary} />
         <View style={styles.list}>
           <MenuItem
