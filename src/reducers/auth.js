@@ -3,7 +3,19 @@ import { combineReducers } from 'redux';
 import types from '../actions/auth';
 
 
-function data(state = { isAuth: false, isAuthSkipped: false }, action) {
+function data(state = {}, action) {
+  switch (action.type) {
+    case types.SYNC_PROFILE:
+      return {
+        ...state,
+        ...action.payload
+      };
+    default:
+      return state;
+  }
+}
+
+function meta(state = { isAuth: false, isAuthSkipped: false }, action) {
   switch (action.type) {
     case types.CHANGE_AUTH_STATE:
       return {
@@ -15,13 +27,6 @@ function data(state = { isAuth: false, isAuthSkipped: false }, action) {
         ...state,
         isAuthSkipped: action.payload
       };
-    default:
-      return state;
-  }
-}
-
-function meta(state = {}, action) {
-  switch (action.type) {
     default:
       return state;
   }

@@ -38,5 +38,13 @@ export function authSkip() {
   };
 }
 
+types.SYNC_PROFILE = 'auth/SYNC_PROFILE';
+export function syncProfile(payload) {
+  return {
+    type: types.SYNC_PROFILE,
+    payload
+  };
+}
+
 
 export default types;

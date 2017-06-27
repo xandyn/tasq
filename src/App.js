@@ -10,7 +10,7 @@ registerScreens(store, Provider);
 
 
 const { screen } = store.getState().ui.data;
-const { isAuthSkipped } = store.getState().auth.data;
+const { isAuthSkipped } = store.getState().auth.meta;
 
 const startApp = () => {
   Navigation.startSingleScreenApp({

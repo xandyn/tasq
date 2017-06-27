@@ -1,34 +1,25 @@
-import { eventChannel } from 'redux-saga';
 import { call, take, put, takeEvery } from 'redux-saga/effects';
 
-import types, { isAuth, isAuthSkipped } from '../actions/auth';
+import types, { syncProfile, isAuth, isAuthSkipped } from '../actions/auth';
 
 import NavigationActions from '../Navigation';
-import FirebaseAuth from '../firebase/auth';
-
-
-function authStateChannel() {
-  if (this.channel) return this.channel;
-
-  const channel = eventChannel(emit =>
-    FirebaseAuth.auth().onAuthStateChanged(
-      user => emit({ user }),
-      error => emit({ error })
-    )
-  );
-
-  this.channel = channel;
-  return channel;
-}
+import Database from '../firebase/database';
+import Auth from '../firebase/auth';
 
 
 export function* syncUser() {
-  const authChannel = yield call(authStateChannel);
+  const authChannel = yield call(Auth.channel);
 
   while (true) {
     const { user, error } = yield take(authChannel);
     if (user) {
-      yield call(console.log, user);
+      const userData = {
+        name: user.displayName,
+        email: user.email,
+        avatar: user.photoURL
+      };
+      yield call(Database.update, `profiles/${user.uid}`, userData);
+      yield put(syncProfile(userData));
     } else {
       yield call(console.log, error);
     }
@@ -37,7 +28,7 @@ export function* syncUser() {
 
 
 export function* authWithFacebook() {
-  const { startLogin, getAccessToken, getCredential, signInWithCredential } = FirebaseAuth.facebook;
+  const { startLogin, getAccessToken, getCredential, signInWithCredential } = Auth.facebook;
   const { result } = yield call(startLogin);
   if (!result || (result && result.isCancelled)) return;
 
