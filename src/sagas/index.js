@@ -1,4 +1,4 @@
-import { spawn } from 'redux-saga/effects';
+import { spawn, all } from 'redux-saga/effects';
 
 import app from './app';
 import auth from './auth';
@@ -13,5 +13,5 @@ const sagas = [
 ];
 
 export default function* rootSaga() {
-  yield sagas.map(saga => spawn(saga));
+  yield all(sagas.map(saga => spawn(saga)));
 }
