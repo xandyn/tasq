@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "686213809052",
+    "firebase_url": "https://tasq-fea46.firebaseio.com",
+    "project_id": "tasq-fea46",
+    "storage_bucket": "tasq-fea46.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:686213809052:android:d4588bb72bf2ceae",
+        "android_client_info": {
+          "package_name": "com.tasq"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "686213809052-fqhsengcil9vq2f0se9u9oekcvor018h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABD3IA8HClyFmMcHICgXZJlet0MhLYlc8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

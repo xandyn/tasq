@@ -15,6 +15,7 @@
 #import <React/RCTRootView.h>
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <Firebase.h>
 
 @implementation AppDelegate
 
@@ -45,6 +46,8 @@
    self.window.rootViewController = rootViewController;
    [self.window makeKeyAndVisible];
    */
+  
+  [FIRApp configure];
   
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];

@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import RNFirebase from 'react-native-firebase';
 
 
 const config = {
@@ -10,7 +10,7 @@ const config = {
   messagingSenderId: '686213809052'
 };
 
-firebase.initializeApp(config);
+const firebase = RNFirebase.initializeApp(config);
 
 
 export default firebase;
