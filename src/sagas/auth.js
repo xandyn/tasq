@@ -45,7 +45,18 @@ export function* authWithFacebook() {
 
 
 export function* authWithGoogle() {
-  // yield put(isAuth(true));
+  const { configure, getUserData, signInWithToken } = Auth.google;
+
+  yield call(configure);
+
+  const { userData } = yield call(getUserData);
+  if (!userData) return;
+
+  const { user } = yield call(signInWithToken, userData.idToken);
+  if (!user) return;
+
+  yield put(isAuth(true));
+  yield put(setScreen('HomeScreen'));
 }
 
 

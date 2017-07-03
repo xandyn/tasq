@@ -1,6 +1,8 @@
 import { applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'remote-redux-devtools';
+import { offline } from 'redux-offline';
+import offlineConfig from '../config/offlineConfig';
 import rootSaga from '../sagas';
 import rootReducer from '../reducers';
 
@@ -15,7 +17,10 @@ function configureStore(initialState) {
   const store = createStore(
     rootReducer,
     initialState,
-    composeWithDevTools(applyMiddleware(...middlewares))
+    composeWithDevTools(
+      applyMiddleware(...middlewares),
+      offline(offlineConfig)
+    )
   );
 
   let rootTask = sagaMiddleware.run(rootSaga);

@@ -1,5 +1,6 @@
 import { eventChannel } from 'redux-saga';
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
+import { GoogleSignin } from 'react-native-google-signin';
 
 import firebase from './index';
 
@@ -36,5 +37,29 @@ export default class Auth {
       user => ({ user }),
       error => ({ error })
     )
+  };
+
+  static google = {
+    configure: () => GoogleSignin.configure({
+      webClientId: '686213809052-fqhsengcil9vq2f0se9u9oekcvor018h.apps.googleusercontent.com',
+      iosClientId: '686213809052-5gp0hfpm57e5or27t5iv877fatb7c76r.apps.googleusercontent.com',
+    }).then(
+      result => ({ result }),
+      error => ({ error })
+    ),
+
+    getUserData: () => GoogleSignin.signIn().then(
+      userData => ({ userData }),
+      error => ({ error })
+    ),
+
+    signInWithToken: (token) => {
+      const provider = firebase.auth.GoogleAuthProvider;
+      const credential = provider.credential(token);
+      return firebase.auth().signInWithCredential(credential).then(
+        user => ({ user }),
+        error => ({ error })
+      );
+    }
   };
 }

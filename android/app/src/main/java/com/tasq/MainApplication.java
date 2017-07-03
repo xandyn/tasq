@@ -13,6 +13,7 @@ import com.microsoft.codepush.react.CodePush;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.reactnativenavigation.controllers.ActivityCallbacks;
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
 
 // RNFirebase package
 import io.invertase.firebase.RNFirebasePackage;
@@ -71,6 +72,7 @@ public class MainApplication extends NavigationApplication {
             new VectorIconsPackage(),
             new LinearGradientPackage(),
             new FBSDKPackage(mCallbackManager),
+            new RNGoogleSigninPackage(),
             new RNFirebasePackage(),
             // Add these packages as appropriate
             // new RNFirebaseAdMobPackage(),

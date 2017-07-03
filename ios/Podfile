@@ -14,6 +14,8 @@ target 'Tasq' do
     # Add any other subspecs you want to use in your project
   ]
 
+  pod 'GoogleSignIn'
+
   # Required by RNFirebase
   pod 'Firebase/Core'
   pod 'RNFirebase', :path => '../node_modules/react-native-firebase'

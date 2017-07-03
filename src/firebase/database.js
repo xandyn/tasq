@@ -20,6 +20,22 @@ class Database {
     });
   }
 
+  static detectNetwork() {
+    return firebase.database().ref('.info/connected').on('value', snap => snap.val());
+  }
+
+  static offlineFirebaseAction = (type, { body, path }) => {
+    const { key, ...rest } = body;
+    switch (type) {
+      case 'OFFLINE_CREATE':
+        return firebase.database().ref(path).push(rest);
+      case 'OFFLINE_UPDATE':
+        return firebase.database().ref(`${path}/${key}`).update(rest);
+      default:
+        return null;
+    }
+  };
+
   static* read(path) {
     const ref = firebase.database().ref(path);
     const result = yield call([ref, ref.once], 'value');
@@ -32,7 +48,7 @@ class Database {
     return result.key;
   }
 
-  static* write(path, data) {
+  static* overwrite(path, data) {
     const ref = firebase.database().ref(path);
     yield call([ref, ref.set], data);
   }

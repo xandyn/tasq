@@ -150,6 +150,10 @@ dependencies {
     compile project(':react-native-vector-icons')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-fbsdk')
+    compile(project(":react-native-google-signin")){
+        exclude group: "com.google.android.gms"
+    }
+    compile 'com.google.android.gms:play-services-auth:11.0.0' // should be at least 9.0.0
     // RNFirebase Required dependencies
     compile(project(':react-native-firebase')) {
         transitive = false
