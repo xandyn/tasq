@@ -1,3 +1,4 @@
+import { AsyncStorage } from 'react-native';
 import { call, take, put, takeLatest } from 'redux-saga/effects';
 
 import types, { syncProfile, isAuth, isAuthSkipped } from '../actions/auth';
@@ -84,7 +85,13 @@ function* watchLogout() {
     yield call(Auth.logout);
     yield put(isAuth(false));
     yield put(isAuthSkipped(false));
-    yield put(setScreen('LoginScreen'));
+    yield call(AsyncStorage.multiRemove, [
+      'reduxPersist:offline',
+      'reduxPersist:tasks',
+      'reduxPersist:auth',
+      'reduxPersist:ui',
+    ]);
+    yield put(setScreen('LoginScreen', true));
   }
 }
 
