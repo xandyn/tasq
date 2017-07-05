@@ -28,15 +28,14 @@ export function* syncUser() {
 
 
 export function* authWithFacebook() {
-  const { startLogin, getAccessToken, getCredential, signInWithCredential } = Auth.facebook;
+  const { startLogin, getAccessToken, signIn } = Auth.facebook;
   const { result } = yield call(startLogin);
   if (!result || (result && result.isCancelled)) return;
 
   const { data } = yield call(getAccessToken);
   if (!data) return;
 
-  const credential = yield call(getCredential, data.accessToken);
-  const { user } = yield call(signInWithCredential, credential);
+  const { user } = yield call(signIn, data.accessToken);
   if (!user) return;
 
   yield put(isAuth(true));
@@ -45,14 +44,14 @@ export function* authWithFacebook() {
 
 
 export function* authWithGoogle() {
-  const { configure, getUserData, signInWithToken } = Auth.google;
+  const { configure, getUserData, signIn } = Auth.google;
 
   yield call(configure);
 
-  const { userData } = yield call(getUserData);
-  if (!userData) return;
+  const { data } = yield call(getUserData);
+  if (!data) return;
 
-  const { user } = yield call(signInWithToken, userData.idToken);
+  const { user } = yield call(signIn, data.idToken);
   if (!user) return;
 
   yield put(isAuth(true));

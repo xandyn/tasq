@@ -31,12 +31,13 @@ export default class Auth {
       error => ({ error })
     ),
 
-    getCredential: token => firebase.auth.FacebookAuthProvider.credential(token),
-
-    signInWithCredential: credential => firebase.auth().signInWithCredential(credential).then(
-      user => ({ user }),
-      error => ({ error })
-    )
+    signIn: (token) => {
+      const credential = firebase.auth.FacebookAuthProvider.credential(token);
+      return firebase.auth().signInWithCredential(credential).then(
+        user => ({ user }),
+        error => ({ error })
+      );
+    }
   };
 
   static google = {
@@ -49,13 +50,12 @@ export default class Auth {
     ),
 
     getUserData: () => GoogleSignin.signIn().then(
-      userData => ({ userData }),
+      data => ({ data }),
       error => ({ error })
     ),
 
-    signInWithToken: (token) => {
-      const provider = firebase.auth.GoogleAuthProvider;
-      const credential = provider.credential(token);
+    signIn: (token) => {
+      const credential = firebase.auth.GoogleAuthProvider.credential(token);
       return firebase.auth().signInWithCredential(credential).then(
         user => ({ user }),
         error => ({ error })
