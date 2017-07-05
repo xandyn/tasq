@@ -9,6 +9,7 @@ import Divider from '../../components/Divider';
 import MenuHeader from '../../components/MenuHeader';
 import MenuItem from '../../components/MenuItem';
 
+import * as authActions from '../../actions/auth';
 import * as uiActions from '../../actions/ui';
 
 import styles, { colors } from './styles';
@@ -20,6 +21,7 @@ import styles, { colors } from './styles';
     profile: auth.data,
   }),
   dispatch => bindActionCreators({
+    ...authActions,
     ...uiActions,
   }, dispatch)
 )
@@ -29,10 +31,15 @@ export default class Menu extends React.Component {
     screen: PropTypes.string.isRequired,
     profile: PropTypes.object.isRequired,
     setScreen: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired,
   };
 
   onPressMenu = screen => (e) => {
     this.props.setScreen(screen, true);
+  };
+
+  onPressLogout = () => {
+    this.props.logout();
   };
 
   render() {
@@ -70,7 +77,11 @@ export default class Menu extends React.Component {
         <Divider color={colors.primary} />
         <View style={styles.list}>
           <MenuItem icon="settings" title="Settings" />
-          <MenuItem icon="log-out" title="Logout" />
+          <MenuItem
+            onPress={this.onPressLogout}
+            icon="log-out"
+            title="Logout"
+          />
         </View>
       </View>
     );

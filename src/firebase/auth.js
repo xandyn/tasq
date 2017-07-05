@@ -20,6 +20,13 @@ export default class Auth {
     return authChannel;
   }
 
+  static logout() {
+    return firebase.auth().signOut().then(
+      result => ({ result }),
+      error => ({ error })
+    );
+  }
+
   static facebook = {
     startLogin: () => LoginManager.logInWithReadPermissions(['public_profile', 'email']).then(
       result => ({ result }),

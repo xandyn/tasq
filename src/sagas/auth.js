@@ -79,10 +79,20 @@ function* watchAuthSkip() {
   yield takeLatest(types.AUTH_SKIP, authSkip);
 }
 
+function* watchLogout() {
+  while (yield take(types.LOGOUT)) {
+    yield call(Auth.logout);
+    yield put(isAuth(false));
+    yield put(isAuthSkipped(false));
+    yield put(setScreen('LoginScreen'));
+  }
+}
+
 
 export default [
   syncUser,
   watchAuthWithFacebook,
   watchAuthWithGoogle,
   watchAuthSkip,
+  watchLogout,
 ];

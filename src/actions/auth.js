@@ -38,6 +38,13 @@ export function authSkip() {
   };
 }
 
+types.LOGOUT = 'auth/LOGOUT';
+export function logout() {
+  return {
+    type: types.LOGOUT
+  };
+}
+
 types.SYNC_PROFILE = 'auth/SYNC_PROFILE';
 export function syncProfile(payload) {
   return {
