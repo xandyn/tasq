@@ -1,13 +1,15 @@
 import React from 'react';
-import { View } from 'react-native';
+
+import Boot from '../containers/Boot';
 
 
-const BootScreen = props => <View style={{ backgroundColor: 'white' }} {...props} />;
+const BootScreen = props => <Boot {...props} />;
 
 
 BootScreen.navigatorStyle = {
+  rootBackgroundImageName: 'Background',
+  screenBackgroundColor: 'transparent',
   orientation: 'portrait',
-  screenBackgroundColor: 'white',
   navBarHidden: true,
   statusBarTextColorScheme: 'dark',
 };

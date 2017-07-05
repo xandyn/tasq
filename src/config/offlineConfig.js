@@ -5,7 +5,7 @@ import startApp from '../App';
 
 const offlineConfig = {
   ...config,
-  detectNetwork: Database.detectNetwork,
+  detectNetwork: callback => Database.detectNetwork(callback),
   effect: (effect, action) => Database.offlineFirebaseAction(action.type, effect),
   persistCallback: () => startApp(),
 };

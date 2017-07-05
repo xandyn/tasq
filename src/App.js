@@ -12,7 +12,7 @@ registerScreens(store, Provider);
 const startApp = () => {
   Navigation.startSingleScreenApp({
     screen: {
-      screen: 'tasq.LoginScreen'
+      screen: 'tasq.BootScreen'
     },
     drawer: {
       left: { screen: 'tasq.SideMenu' }
@@ -30,4 +30,7 @@ const startApp = () => {
   });
 };
 
+
+// start app after rehydration is complete
+// persistCallback in ./src/config/offlineConfig
 export default startApp;

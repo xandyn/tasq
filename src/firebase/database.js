@@ -20,8 +20,8 @@ class Database {
     });
   }
 
-  static detectNetwork() {
-    return firebase.database().ref('.info/connected').on('value', snap => snap.val());
+  static detectNetwork(callback) {
+    return firebase.database().ref('.info/connected').on('value', snap => callback(!!snap.val()));
   }
 
   static offlineFirebaseAction = (type, { body, path }) => {
