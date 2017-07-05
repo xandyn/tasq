@@ -32,6 +32,10 @@ export default class Login extends React.Component {
     super(props);
 
     NavigationActions.setNavigator(props.navigator);
+    props.navigator.setDrawerEnabled({
+      side: 'left',
+      enabled: false
+    });
   }
 
   onFacebookLogin = () => {

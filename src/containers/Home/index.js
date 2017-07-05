@@ -21,6 +21,10 @@ export default class Home extends React.Component {
 
     NavigationActions.setNavigator(props.navigator);
     props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+    props.navigator.setDrawerEnabled({
+      side: 'left',
+      enabled: true
+    });
   }
 
   onNavigatorEvent = (event) => {

@@ -18,11 +18,44 @@ export function* screenSet({ payload, meta: { closeDrawer } }) {
 }
 
 
+export function* spinnerShow({ payload }) {
+  if (payload) {
+    yield call(NavigationActions.showLightBox, {
+      screen: 'tasq.SpinnerScreen',
+      style: {
+        backgroundBlur: 'light',
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+      }
+    });
+  } else {
+    yield call(NavigationActions.dismissLightBox);
+  }
+}
+
+
+export function* drawerEnable({ payload }) {
+  yield call(NavigationActions.setDrawerEnabled, {
+    side: 'left',
+    enabled: payload
+  });
+}
+
+
 export function* watchSetScreen() {
   yield takeEvery(types.SET_SCREEN, screenSet);
+}
+
+export function* watchShowSpinner() {
+  yield takeEvery(types.SHOW_SPINNER, spinnerShow);
+}
+
+export function* watchEnableDrawer() {
+  yield takeEvery(types.ENABLE_DRAWER, drawerEnable);
 }
 
 
 export default [
   watchSetScreen,
+  watchShowSpinner,
+  watchEnableDrawer,
 ];

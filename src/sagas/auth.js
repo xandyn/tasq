@@ -2,7 +2,7 @@ import { AsyncStorage } from 'react-native';
 import { call, take, put, takeLatest } from 'redux-saga/effects';
 
 import types, { syncProfile, isAuth, isAuthSkipped } from '../actions/auth';
-import { setScreen } from '../actions/ui';
+import { setScreen, showSpinner } from '../actions/ui';
 
 import Database from '../firebase/database';
 import Auth from '../firebase/auth';
@@ -36,7 +36,9 @@ export function* authWithFacebook() {
   const { data } = yield call(getAccessToken);
   if (!data) return;
 
+  yield put(showSpinner(true));
   const { user } = yield call(signIn, data.accessToken);
+  yield put(showSpinner(false));
   if (!user) return;
 
   yield put(isAuth(true));
@@ -52,7 +54,9 @@ export function* authWithGoogle() {
   const { data } = yield call(getUserData);
   if (!data) return;
 
+  yield put(showSpinner(true));
   const { user } = yield call(signIn, data.idToken);
+  yield put(showSpinner(false));
   if (!user) return;
 
   yield put(isAuth(true));
@@ -76,9 +80,11 @@ function* watchAuthWithGoogle() {
   yield takeLatest(types.AUTH_WITH_GOOGLE, authWithGoogle);
 }
 
+
 function* watchAuthSkip() {
   yield takeLatest(types.AUTH_SKIP, authSkip);
 }
+
 
 function* watchLogout() {
   while (yield take(types.LOGOUT)) {

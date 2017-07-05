@@ -20,6 +20,7 @@ class NavigationActions {
   dismissAllModals = params => this.navigator.dismissAllModals(params);
   showLightBox = params => this.navigator.showLightBox(params);
   dismissLightBox = params => this.navigator.dismissLightBox(params);
+  setDrawerEnabled = params => this.navigator.setDrawerEnabled(params);
 }
 
 
