@@ -8,5 +8,12 @@ export function appInitialized() {
   };
 }
 
+types.SYNC_START = 'app/SYNC_START';
+export function syncStart() {
+  return {
+    type: types.SYNC_START
+  };
+}
+
 
 export default types;

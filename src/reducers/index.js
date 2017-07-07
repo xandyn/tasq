@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
 
 import auth from './auth';
-import lists from './lists';
+import tasks from './tasks';
 import ui from './ui';
 
 
 const rootReducer = combineReducers({
   auth,
-  lists,
+  tasks,
   ui,
 });
 

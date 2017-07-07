@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
 
-import types from '../actions/lists';
+import types from '../actions/tasks';
 
 
 function allIds(state = [], action) {
   switch (action.type) {
-    case types.FILL_LISTS:
+    case types.SYNC_TASKS:
       return [
         ...state,
-        ...action.payload.ids
+        ...Object.keys(action.payload)
       ];
     default:
       return state;
@@ -17,20 +17,18 @@ function allIds(state = [], action) {
 
 function byId(state = {}, action) {
   switch (action.type) {
-    case types.FILL_LISTS:
+    case types.SYNC_TASKS:
       return {
         ...state,
-        ...action.payload.map
+        ...action.payload
       };
     default:
       return state;
   }
 }
 
-function meta(state = { fetching: false }, action) {
+function meta(state = {}, action) {
   switch (action.type) {
-    case types.FETCH_LISTS_STATE:
-      return state.set('fetching', action.payload);
     default:
       return state;
   }

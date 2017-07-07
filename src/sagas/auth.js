@@ -1,7 +1,9 @@
 import { AsyncStorage } from 'react-native';
-import { call, take, put, takeLatest } from 'redux-saga/effects';
+import { all, call, take, put, takeLatest } from 'redux-saga/effects';
 
-import types, { syncProfile, isAuth, isAuthSkipped } from '../actions/auth';
+import { syncStart } from '../actions/app';
+import types, { syncProfile, clearProfile, isAuth, isAuthSkipped } from '../actions/auth';
+import { clearTasks } from '../actions/tasks';
 import { setScreen, showSpinner } from '../actions/ui';
 
 import Database from '../firebase/database';
@@ -15,18 +17,26 @@ export function* syncUser() {
     const { user, error } = yield take(authChannel);
     if (user) {
       const userData = {
+        uid: user.uid,
         name: user.displayName,
         email: user.email,
         avatar: user.photoURL
       };
       yield call(Database.update, `profiles/${user.uid}`, userData);
       yield put(syncProfile(userData));
+      yield put(syncStart());
     } else {
       yield call(console.log, error);
     }
   }
 }
 
+function* authComplete() {
+  yield all([
+    put(isAuth(true)),
+    put(setScreen('HomeScreen'))
+  ]);
+}
 
 export function* authWithFacebook() {
   const { startLogin, getAccessToken, signIn } = Auth.facebook;
@@ -41,8 +51,7 @@ export function* authWithFacebook() {
   yield put(showSpinner(false));
   if (!user) return;
 
-  yield put(isAuth(true));
-  yield put(setScreen('HomeScreen'));
+  yield call(authComplete);
 }
 
 
@@ -59,8 +68,7 @@ export function* authWithGoogle() {
   yield put(showSpinner(false));
   if (!user) return;
 
-  yield put(isAuth(true));
-  yield put(setScreen('HomeScreen'));
+  yield call(authComplete);
 }
 
 
@@ -89,8 +97,8 @@ function* watchAuthSkip() {
 function* watchLogout() {
   while (yield take(types.LOGOUT)) {
     yield call(Auth.logout);
-    yield put(isAuth(false));
-    yield put(isAuthSkipped(false));
+    yield put(clearProfile());
+    yield put(clearTasks());
     yield call(AsyncStorage.multiRemove, [
       'reduxPersist:offline',
       'reduxPersist:tasks',

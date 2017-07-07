@@ -53,5 +53,13 @@ export function syncProfile(payload) {
   };
 }
 
+types.CLEAR_PROFILE = 'auth/CLEAR_PROFILE';
+export function clearProfile(payload) {
+  return {
+    type: types.CLEAR_PROFILE,
+    payload
+  };
+}
+
 
 export default types;

@@ -2,13 +2,13 @@ import { spawn, all } from 'redux-saga/effects';
 
 import app from './app';
 import auth from './auth';
-import lists from './lists';
+import tasks from './tasks';
 import ui from './ui';
 
 const sagas = [
   ...app,
   ...auth,
-  ...lists,
+  ...tasks,
   ...ui,
 ];
 

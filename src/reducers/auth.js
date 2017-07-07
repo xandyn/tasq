@@ -11,6 +11,8 @@ function data(state = {}, action) {
         ...state,
         ...action.payload
       };
+    case types.CLEAR_PROFILE:
+      return {};
     case PERSIST_REHYDRATE:
       return { ...state, ...action.payload.auth.data };
     default:
@@ -30,6 +32,8 @@ function meta(state = { isAuth: false, isAuthSkipped: false }, action) {
         ...state,
         isAuthSkipped: action.payload
       };
+    case types.CLEAR_PROFILE:
+      return { isAuth: false, isAuthSkipped: false };
     case PERSIST_REHYDRATE:
       return { ...state, ...action.payload.auth.meta };
     default:
