@@ -37,6 +37,17 @@ export default StyleSheet.create({
   label: {
     fontSize: 11,
   },
+  date: {
+    width: '70%',
+    height: 40,
+    marginBottom: 10,
+    paddingLeft: 0,
+    justifyContent: 'center',
+  },
+  dateText: {
+    ...BaseStyles.input,
+    fontSize: 15,
+  },
   input: {
     ...BaseStyles.input,
     fontSize: 15,
