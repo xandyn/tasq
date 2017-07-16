@@ -7,7 +7,6 @@ function allIds(state = [], action) {
   switch (action.type) {
     case types.SYNC_TASKS:
       return [
-        ...state,
         ...Object.keys(action.payload || [])
       ];
     default:
@@ -19,7 +18,6 @@ function byId(state = {}, action) {
   switch (action.type) {
     case types.SYNC_TASKS:
       return {
-        ...state,
         ...action.payload || {}
       };
     default:

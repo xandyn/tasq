@@ -1,24 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
+import moment from 'moment';
 
 import Label from '../../components/Label';
 
 import styles from './styles';
 
 
-const TodayInfo = ({ dayOfWeek, date, tasksTodo, tasksTotal }) => (
+const TodayInfo = ({ tasksTodo, tasksTotal }) => (
   <View style={styles.container}>
-    <Text style={styles.week}>Wednesday</Text>
+    <Text style={styles.week}>{moment().format('dddd')}</Text>
     <Label
       upperCase
-      text="March 18, 2015"
+      text={moment().format('MMMM D, YYYY')}
       style={styles.date}
     />
     <View style={styles.tasks}>
-      <Text style={styles.tasksTodo}>6</Text>
+      <Text style={styles.tasksTodo}>{tasksTodo}</Text>
       <View style={styles.tasksTotal}>
-        <Text style={styles.tasksTotalText}>10</Text>
+        <Text style={styles.tasksTotalText}>{tasksTotal}</Text>
       </View>
     </View>
   </View>
@@ -26,8 +27,6 @@ const TodayInfo = ({ dayOfWeek, date, tasksTodo, tasksTotal }) => (
 
 
 TodayInfo.propTypes = {
-  dayOfWeek: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
   tasksTodo: PropTypes.number.isRequired,
   tasksTotal: PropTypes.number.isRequired,
 };

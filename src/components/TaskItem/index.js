@@ -7,14 +7,14 @@ import Divider from '../Divider';
 import styles, { colors } from './styles';
 
 
-const TaskItem = ({ item: { date, text, status }, showDividers }) => (
+const TaskItem = ({ item: { date, description, status }, showDividers }) => (
   <View style={styles.container}>
     <View style={styles.item}>
       <Text style={styles.due}>
         {moment(date).format('h:mm a')}
       </Text>
       <Text style={styles.text} ellipsizeMode="tail" numberOfLines={1}>
-        {text}
+        {description}
       </Text>
       <View style={[styles.color, { backgroundColor: colors.taskStatus[status] }]} />
     </View>

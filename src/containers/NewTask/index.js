@@ -65,7 +65,7 @@ export default class NewTask extends React.Component {
 
   saveTask = () => {
     const { description, date } = this.state;
-    if (!description.trim()) return;
+    if (!description.trim() || !date) return;
     this.props.createTask({
       description,
       status: 'todo',
@@ -140,7 +140,7 @@ export default class NewTask extends React.Component {
               )}
               <DateTimePicker
                 mode="date"
-                date={moment(date).toDate()}
+                date={date ? moment(date).toDate() : undefined}
                 isVisible={datePickerVisible}
                 onConfirm={this.handlePicker('date')}
                 onCancel={this.hidePicker('date')}
@@ -173,7 +173,7 @@ export default class NewTask extends React.Component {
               )}
               <DateTimePicker
                 mode="time"
-                date={moment(date).toDate()}
+                date={date ? moment(date).toDate() : undefined}
                 isVisible={timePickerVisible}
                 onConfirm={this.handlePicker('time')}
                 onCancel={this.hidePicker('time')}

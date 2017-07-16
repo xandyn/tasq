@@ -13,7 +13,7 @@ const Tasks = ({ tasks, showDividers, showEdgeDividers }) => (
     {showEdgeDividers && <Divider />}
     {tasks.map((item, index) => (
       <TaskItem
-        key={item.id}
+        key={item.uid}
         item={item}
         showDividers={showDividers && tasks.length !== index + 1}
       />

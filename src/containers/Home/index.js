@@ -1,19 +1,30 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import moment from 'moment';
 
 import TodayInfo from '../../components/TodayInfo';
 import Tasks from '../../components/Tasks';
 import CreateButton from '../../components/CreateButton';
+
+import { getAllTasks } from '../../selectors/tasks';
 
 import NavigationActions from '../../Navigation';
 
 import styles from './styles';
 
 
+@connect(
+  ({ tasks }) => ({
+    tasks: getAllTasks({ tasks }),
+  }),
+  null
+)
 export default class Home extends React.Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
+    tasks: PropTypes.array.isRequired,
   };
 
   constructor(props) {
@@ -45,37 +56,17 @@ export default class Home extends React.Component {
   };
 
   render() {
-    const tasks = [{
-      id: 1,
-      date: '2017-06-26T12:38:37',
-      text: 'Brian\'s birthday',
-      status: 'completed',
-    }, {
-      id: 2,
-      date: '2017-06-26T12:38:37',
-      text: 'Brian\'s birthday',
-      status: 'completed',
-    }, {
-      id: 3,
-      date: '2017-06-26T12:38:37',
-      text: 'Brian\'s birthday',
-      status: 'snoozed',
-    }, {
-      id: 4,
-      date: '2017-06-26T12:38:37',
-      text: 'Brian\'s birthday',
-      status: 'overdue',
-    }];
+    const { tasks } = this.props;
+    const todayTasks = tasks.filter(t => moment().isSame(t.date, 'day'));
+    const todoTasks = todayTasks.filter(t => t.status === 'todo');
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
           <TodayInfo
-            dayOfWeek="Wednesday"
-            date="March 18, 2015"
-            tasksTodo={6}
-            tasksTotal={10}
+            tasksTodo={todoTasks.length}
+            tasksTotal={todayTasks.length}
           />
-          <Tasks tasks={tasks} />
+          <Tasks tasks={todayTasks} />
         </ScrollView>
         <CreateButton onPress={this.onCreateTask} />
       </View>

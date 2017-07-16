@@ -17,7 +17,7 @@ const Colors = {
   },
   taskStatus: {
     todo: 'transparent',
-    snoozed: 'white',
+    snoozed: '#ffffff',
     completed: '#50d3c2',
     overdue: '#d667ce'
   },

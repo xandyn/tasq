@@ -43,9 +43,9 @@ class Database {
   }
 
   static* create(path, data) {
-    const ref = firebase.database().ref(path);
-    const result = yield call([ref, ref.push], data);
-    return result.key;
+    const key = firebase.database().ref(path).push().key;
+    yield call(Database.update, `${path}/${key}`, { uid: key, ...data });
+    return key;
   }
 
   static* overwrite(path, data) {
