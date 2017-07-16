@@ -16,6 +16,7 @@ const Colors = {
     gray: '#A4A4A7',
   },
   taskStatus: {
+    todo: 'transparent',
     snoozed: 'white',
     completed: '#50d3c2',
     overdue: '#d667ce'

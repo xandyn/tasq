@@ -37,7 +37,7 @@ export default class NewTask extends React.Component {
       datePickerVisible: false,
       timePickerVisible: false,
       description: '',
-      date: '',
+      date: null,
     };
 
     props.navigator.setTitle({ title: 'Add New' });
@@ -65,7 +65,12 @@ export default class NewTask extends React.Component {
 
   saveTask = () => {
     const { description, date } = this.state;
-    this.props.createTask({ description, date });
+    if (!description.trim()) return;
+    this.props.createTask({
+      description,
+      status: 'todo',
+      date,
+    });
   };
 
   handlePicker = type => (date) => {
@@ -74,7 +79,7 @@ export default class NewTask extends React.Component {
       newDate.add(1, 'hour');
     }
     this.setState({
-      date: newDate.format(),
+      date: newDate.valueOf(),
       [`${type}PickerVisible`]: false,
     });
   };
@@ -135,6 +140,7 @@ export default class NewTask extends React.Component {
               )}
               <DateTimePicker
                 mode="date"
+                date={moment(date).toDate()}
                 isVisible={datePickerVisible}
                 onConfirm={this.handlePicker('date')}
                 onCancel={this.hidePicker('date')}
@@ -167,6 +173,7 @@ export default class NewTask extends React.Component {
               )}
               <DateTimePicker
                 mode="time"
+                date={moment(date).toDate()}
                 isVisible={timePickerVisible}
                 onConfirm={this.handlePicker('time')}
                 onCancel={this.hidePicker('time')}
