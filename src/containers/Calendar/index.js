@@ -1,20 +1,30 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Calendar as CalendarView } from 'react-native-calendars';
 import moment from 'moment';
 
 import Tasks from '../../components/Tasks';
 import CreateButton from '../../components/CreateButton';
 
+import { getAllTasks } from '../../selectors/tasks';
+
 import NavigationActions from '../../Navigation';
 
 import styles from './styles';
 
 
+@connect(
+  ({ tasks }) => ({
+    tasks: getAllTasks({ tasks }),
+  }),
+  null
+)
 export default class Calendar extends React.Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
+    tasks: PropTypes.array.isRequired,
   };
 
   constructor(props) {
@@ -82,33 +92,18 @@ export default class Calendar extends React.Component {
   };
 
   render() {
-    const tasks = [{
-      id: 1,
-      date: '2017-06-26T12:38:37',
-      text: 'Brian\'s birthday',
-      status: 'completed',
-    }, {
-      id: 2,
-      date: '2017-06-26T12:38:37',
-      text: 'Brian\'s birthday',
-      status: 'completed',
-    }, {
-      id: 3,
-      date: '2017-06-26T12:38:37',
-      text: 'Brian\'s birthday',
-      status: 'snoozed',
-    }, {
-      id: 4,
-      date: '2017-06-26T12:38:37',
-      text: 'Brian\'s birthday',
-      status: 'overdue',
-    }];
+    const { current, selected } = this.state;
+    const { tasks } = this.props;
+
+    const tasksForSelectedDate = tasks.filter(t => moment(selected).isSame(t.date, 'day'));
+    const markedDates = {};
+    tasks.map(t => markedDates[moment(t.date).format('YYYY-MM-DD')] = { marked: true });
+
     const calendarTheme = {
       calendarContainerStyle: { marginVertical: 5 },
       dayTextStyle: { fontFamily: 'Avenir-Book' },
       weekDaysStyle: { fontFamily: 'Avenir-Book' },
     };
-    const { current, selected } = this.state;
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -116,15 +111,11 @@ export default class Calendar extends React.Component {
             hideHeader
             current={current}
             selected={[selected]}
-            markedDates={{
-              '2017-06-16': { marked: true },
-              '2017-06-17': { marked: true },
-              '2017-06-18': { disabled: true }
-            }}
+            markedDates={markedDates}
             onDayPress={this.onDayPress}
             theme={calendarTheme}
           />
-          <Tasks showEdgeDividers tasks={tasks} />
+          <Tasks showEdgeDividers tasks={tasksForSelectedDate} />
         </ScrollView>
         <CreateButton onPress={this.onCreateTask} />
       </View>

@@ -8,7 +8,7 @@ import Divider from '../Divider';
 import styles from './styles';
 
 
-const Tasks = ({ tasks, showDividers, showEdgeDividers }) => (
+const Tasks = ({ tasks, showDividers, showEdgeDividers }) => tasks.length > 0 ? (
   <View style={styles.container}>
     {showEdgeDividers && <Divider />}
     {tasks.map((item, index) => (
@@ -20,7 +20,7 @@ const Tasks = ({ tasks, showDividers, showEdgeDividers }) => (
     ))}
     {showEdgeDividers && <Divider />}
   </View>
-);
+) : (<View />);
 
 Tasks.defaultProps = {
   showDividers: true,

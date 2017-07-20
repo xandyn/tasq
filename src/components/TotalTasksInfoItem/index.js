@@ -14,7 +14,7 @@ const TotalTasksInfoItem = ({ type, count, percents }) => (
     <View style={styles.itemContainer}>
       <Circle
         size={30}
-        progress={0.5}
+        progress={percents || 0}
         unfilledColor="rgba(255,255,255,0.1)"
         borderWidth={0}
         thickness={2}

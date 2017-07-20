@@ -62,4 +62,19 @@ export default StyleSheet.create({
       ios: { opacity: 0.7 }
     }),
   },
+  moon: {
+    width: 120,
+    height: 120,
+    opacity: 0.7,
+    marginVertical: 30,
+  },
+  emptyTasks: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  emptyTasksText: {
+    ...BaseStyles.text,
+    fontSize: 19,
+    textAlign: 'center',
+  }
 });

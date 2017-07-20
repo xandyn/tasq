@@ -8,13 +8,13 @@ import TotalTasksInfoItem from '../TotalTasksInfoItem';
 import styles from './styles';
 
 
-const TotalTasksInfo = ({ completed, snoozed, overdue }) => (
+const TotalTasksInfo = ({ completed, snoozed, overdue, total }) => (
   <View style={styles.container}>
-    <TotalTasksInfoItem type="completed" count={35} percents={100} />
+    <TotalTasksInfoItem type="completed" count={completed} percents={completed / total} />
     <Divider />
-    <TotalTasksInfoItem type="snoozed" count={85} percents={100} />
+    <TotalTasksInfoItem type="snoozed" count={snoozed} percents={snoozed / total} />
     <Divider />
-    <TotalTasksInfoItem type="overdue" count={18} percents={100} />
+    <TotalTasksInfoItem type="overdue" count={overdue} percents={overdue / total} />
   </View>
 );
 
@@ -22,6 +22,7 @@ TotalTasksInfo.propTypes = {
   completed: PropTypes.number.isRequired,
   snoozed: PropTypes.number.isRequired,
   overdue: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
 };
 
 

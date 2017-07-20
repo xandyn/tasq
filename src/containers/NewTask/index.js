@@ -140,7 +140,7 @@ export default class NewTask extends React.Component {
               )}
               <DateTimePicker
                 mode="date"
-                date={date ? moment(date).toDate() : undefined}
+                date={date ? moment(date).toDate() : new Date()}
                 isVisible={datePickerVisible}
                 onConfirm={this.handlePicker('date')}
                 onCancel={this.hidePicker('date')}
@@ -173,7 +173,7 @@ export default class NewTask extends React.Component {
               )}
               <DateTimePicker
                 mode="time"
-                date={date ? moment(date).toDate() : undefined}
+                date={date ? moment(date).toDate() : new Date()}
                 isVisible={timePickerVisible}
                 onConfirm={this.handlePicker('time')}
                 onCancel={this.hidePicker('time')}

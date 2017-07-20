@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import moment from 'moment';
 
 import Label from '../../components/Label';
@@ -16,12 +16,21 @@ const TodayInfo = ({ tasksTodo, tasksTotal }) => (
       text={moment().format('MMMM D, YYYY')}
       style={styles.date}
     />
-    <View style={styles.tasks}>
-      <Text style={styles.tasksTodo}>{tasksTodo}</Text>
-      <View style={styles.tasksTotal}>
-        <Text style={styles.tasksTotalText}>{tasksTotal}</Text>
+    {tasksTotal > 0 ? (
+      <View style={styles.tasks}>
+        <Text style={styles.tasksTodo}>{tasksTodo}</Text>
+        <View style={styles.tasksTotal}>
+          <Text style={styles.tasksTotalText}>{tasksTotal}</Text>
+        </View>
       </View>
-    </View>
+    ) : (
+      <View style={styles.emptyTasks}>
+        <Image style={styles.moon} source={require('../../assets/img/moon.png')} />
+        <Text style={styles.emptyTasksText}>
+          Hooray!{'\n'}You have done everything for today.
+        </Text>
+      </View>
+    )}
   </View>
 );
 

@@ -22,10 +22,13 @@ const TaskItem = ({ item: { date, description, status }, showDividers }) => (
   </View>
 );
 
+TaskItem.defaultProps = {
+  showDividers: false,
+};
 
 TaskItem.propTypes = {
   item: PropTypes.object.isRequired,
-  showDividers: PropTypes.bool.isRequired,
+  showDividers: PropTypes.bool,
 };
 
 

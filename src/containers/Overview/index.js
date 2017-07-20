@@ -1,19 +1,29 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import moment from 'moment';
 
 import MonthNavigator from '../../components/MonthNavigator';
 import TotalTasksInfo from '../../components/TotalTasksInfo';
+
+import { getAllTasks } from '../../selectors/tasks';
 
 import NavigationActions from '../../Navigation';
 
 import styles from './styles';
 
 
+@connect(
+  ({ tasks }) => ({
+    tasks: getAllTasks({ tasks }),
+  }),
+  null
+)
 export default class Overview extends React.Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
+    tasks: PropTypes.array.isRequired,
   };
 
   constructor(props) {
@@ -54,33 +64,11 @@ export default class Overview extends React.Component {
   };
 
   render() {
-    const tasks = [{
-      id: 1,
-      date: '2017-06-26T12:00:00',
-      text: 'Brian\'s birthday',
-      status: 'completed',
-    }, {
-      id: 2,
-      date: '2017-06-27T12:00:00',
-      text: 'Brian\'s birthday',
-      status: 'completed',
-    }, {
-      id: 3,
-      date: '2017-07-06T12:00:00',
-      text: 'Brian\'s birthday',
-      status: 'snoozed',
-    }, {
-      id: 4,
-      date: '2017-07-10T12:00:00',
-      text: 'Brian\'s birthday',
-      status: 'overdue',
-    }, {
-      id: 5,
-      date: '2017-07-10T13:00:00',
-      text: 'Brian\'s birthday',
-      status: 'overdue',
-    }];
     const { current } = this.state;
+    const { tasks } = this.props;
+    const tasksForCurrentMonth = tasks.filter(t => moment(current).isSame(t.date, 'month'));
+    const totalInfo = { completed: 0, snoozed: 0, overdue: 0 };
+    tasksForCurrentMonth.map(t => totalInfo[t.status]++);
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -90,9 +78,10 @@ export default class Overview extends React.Component {
             year={current.format('YYYY')}
           />
           <TotalTasksInfo
-            completed={34}
-            snoozed={85}
-            overdue={18}
+            completed={totalInfo.completed}
+            snoozed={totalInfo.snoozed}
+            overdue={totalInfo.overdue}
+            total={tasksForCurrentMonth.length}
           />
         </ScrollView>
       </View>
