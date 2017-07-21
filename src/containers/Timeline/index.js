@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import Tasks from '../../components/Tasks';
+import TaskItem from '../../components/TaskItem';
 import SortButton from '../../components/SortButton';
 import DayDivider from '../../components/DayDivider';
+import Divider from '../../components/Divider';
 
 import { getAllTasks } from '../../selectors/tasks';
 
@@ -30,7 +31,9 @@ export default class Timeline extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      renderWithPast: false,
+    };
 
     props.navigator.setTitle({ title: 'Timeline' });
     props.navigator.setStyle({
@@ -40,17 +43,6 @@ export default class Timeline extends React.Component {
 
     NavigationActions.setNavigator(props.navigator);
     props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
-  }
-
-  componentDidMount() {
-    const wait = new Promise(resolve => setTimeout(resolve, 100));
-    wait.then(() => {
-      this.timeline.scrollToLocation({
-        animated: true,
-        sectionIndex: 1,
-        itemIndex: 0
-      });
-    });
   }
 
   onNavigatorEvent = (event) => {
@@ -65,38 +57,57 @@ export default class Timeline extends React.Component {
     }
   };
 
-  render() {
+  onRefresh = () => {
+    this.setState({ renderWithPast: true });
+  };
+
+  renderSections = () => {
+    const { renderWithPast } = this.state;
     const { tasks } = this.props;
-    const tasksFlatten = {};
-    const allDates = tasks.map(t => moment(t.date).format('YYYY-MM-DD'));
-    const dates = [...new Set(allDates)].sort();
-    for (const date of dates) {
-      tasksFlatten[date] = tasks.filter(t => moment(t.date).isSame(date, 'day'));
+    const sections = [];
+    const today = moment();
+    const dates = new Set();
+    let tasksData = [];
+    if (renderWithPast) {
+      tasksData = tasks;
+      tasksData.map(t => dates.add(moment(t.date).format('YYYY-MM-DD')));
+    } else {
+      tasksData = tasks.filter((t) => {
+        const date = moment(t.date);
+        if (date.isSameOrAfter(today, 'day')) {
+          dates.add(date.format('YYYY-MM-DD'));
+          return true;
+        }
+        return false;
+      });
     }
-    const today = moment().format('YYYY-MM-DD');
-    const todayIndex = dates.indexOf(today);
-    const pastDates = todayIndex > 0 ? dates.slice(0, todayIndex) : [];
-    const futureDates = todayIndex > -1 ? dates.slice(todayIndex) : [];
+    const sortedDates = [...dates].sort();
+    for (const date of sortedDates) {
+      sections.push({
+        date,
+        key: date,
+        data: tasksData.filter(t => moment(t.date).isSame(date, 'day')),
+        renderItem: ({ item }) => (
+          <TaskItem key={item.uid} item={item} />
+        ),
+        ItemSeparatorComponent: () => <Divider />,
+      });
+    }
+    return sections;
+  };
+
+  render() {
     return (
       <View style={styles.container}>
         <SectionList
-          ref={ref => this.timeline = ref}
-          keyExtractor={item => item}
-          getItemLayout={(sections, index) => ({
-            length: 82,
-            offset: (pastDates.length * 50) + (82 * index),
-            index
-          })}
-          renderItem={({ item }) => (
-            <View key={item}>
-              <DayDivider date={moment(item).format('dddd, MMMM D')} />
-              <Tasks tasks={tasksFlatten[item]} />
-            </View>
+          refreshing={false}
+          keyExtractor={item => item.uid}
+          onRefresh={this.onRefresh}
+          stickySectionHeadersEnabled={false}
+          renderSectionHeader={({ section }) => (
+            <DayDivider date={moment(section.date).format('dddd, MMMM D')} />
           )}
-          sections={[
-            { data: pastDates, key: 'past' },
-            { data: futureDates, key: 'future' },
-          ]}
+          sections={this.renderSections()}
         />
         <SortButton />
       </View>
