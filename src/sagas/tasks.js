@@ -7,6 +7,7 @@ import { getUserUid } from '../selectors/auth';
 import Database from '../firebase/database';
 
 import NavigationActions from '../Navigation';
+import Notifications from '../Notification';
 
 
 export function* startSyncTasks() {
@@ -22,6 +23,7 @@ export function* startSyncTasks() {
   while (true) {
     const { value: tasks } = yield take(channel);
     yield put(syncTasks(tasks));
+    yield call(Notifications.createNotificationsForTasks, tasks);
   }
 }
 

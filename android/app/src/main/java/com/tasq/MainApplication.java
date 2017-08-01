@@ -12,6 +12,7 @@ import com.reactnativenavigation.NavigationApplication;
 import com.microsoft.codepush.react.CodePush;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.reactnativenavigation.controllers.ActivityCallbacks;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 
@@ -68,9 +69,10 @@ public class MainApplication extends NavigationApplication {
     // Add additional packages you require here
     // No need to add RnnPackage and MainReactPackage
     return Arrays.<ReactPackage>asList(
-            new CodePush("<INSERT_STAGING_KEY>", MainApplication.this, BuildConfig.DEBUG),
+            new CodePush("u2tfsUGR2Q1epH4Xo8Tod8vZvpoNa08575a3-4ef8-493a-8a03-5dddf80a608a", MainApplication.this, BuildConfig.DEBUG),
             new VectorIconsPackage(),
             new LinearGradientPackage(),
+            new ReactNativePushNotificationPackage(),
             new FBSDKPackage(mCallbackManager),
             new RNGoogleSigninPackage(),
             new RNFirebasePackage(),

@@ -1,4 +1,5 @@
 import { Navigation } from 'react-native-navigation';
+import PushNotification from 'react-native-push-notification';
 import { Provider } from 'react-redux';
 import registerScreens from './screens';
 import configureStore from './store/configureStore';
@@ -7,6 +8,14 @@ import configureStore from './store/configureStore';
 const store = configureStore();
 
 registerScreens(store, Provider);
+
+
+PushNotification.configure({
+  onNotification: notification => store.dispatch({
+    type: 'app/NOTIFICATION',
+    payload: notification
+  })
+});
 
 
 const startApp = () => {

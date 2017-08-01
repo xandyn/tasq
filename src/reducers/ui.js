@@ -12,7 +12,10 @@ function data(state = { screen: 'HomeScreen' }, action) {
         screen: action.payload
       };
     case PERSIST_REHYDRATE:
-      return { ...state, ...action.payload.ui.data };
+      return {
+        ...state,
+        ...action.payload.ui ? action.payload.ui.data : {}
+      };
     default:
       return state;
   }
@@ -21,7 +24,10 @@ function data(state = { screen: 'HomeScreen' }, action) {
 function meta(state = {}, action) {
   switch (action.type) {
     case PERSIST_REHYDRATE:
-      return { ...state, ...action.payload.ui.meta };
+      return {
+        ...state,
+        ...action.payload.ui ? action.payload.ui.meta : {}
+      };
     default:
       return state;
   }

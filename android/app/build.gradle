@@ -153,6 +153,10 @@ dependencies {
     compile(project(":react-native-google-signin")){
         exclude group: "com.google.android.gms"
     }
+    compile project(':react-native-push-notification')
+    compile ('com.google.android.gms:play-services-gcm:11.0.0') {
+        force = true;
+    }
     compile 'com.google.android.gms:play-services-auth:11.0.0' // should be at least 9.0.0
     // RNFirebase Required dependencies
     compile(project(':react-native-firebase')) {
